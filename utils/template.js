@@ -13,14 +13,19 @@
  * @returns {string} The complete MDX file content as a string.
  */
 module.exports = function template ({ author, date, title, seoDescription, content }) {
+	// Remove new lines from content
+    const cleanedContent = content.replace(/\r?\n|\r/g, " ").trim();
+
+	// Return what will be the MDX file content
+	// This is a template for the MDX file
 	return (`import { ArticleLayout } from '@/components/ArticleLayout'
 
 export const article = {
-	author: '${author}',
-	date: '${date}',
-	title: '${title}',
-	description:
-	'${seoDescription}',
+	author: "${author}",
+	date: "${date}",
+	title: "${title}",
+	description: 
+	"${cleanedContent.substring(0, 300) + "..."}",
 }
 
 export const metadata = {
